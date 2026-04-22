@@ -8,6 +8,7 @@ import {
 	Alert,
 	Badge,
 	Button,
+	Card,
 	Dialog,
 	ErrorMessage,
 	FormControl,
@@ -24,6 +25,7 @@ import "./index.css";
 
 const globalComponents = {
 	Button,
+	Card,
 	TextInput,
 	Input,
 	FormControl,
@@ -38,7 +40,6 @@ const app = createApp(App);
 setConfig("resourceFetcher", frappeRequest);
 
 app.use(router);
-app.use(resourcesPlugin);
 app.use(pageMetaPlugin);
 app.use(FrappeUI);
 
@@ -51,7 +52,7 @@ for (const key in globalComponents) {
 
 if (import.meta.env.DEV) {
 	frappeRequest({
-		url: "/api/method/marketplace.www.marketplace.index.get_context_for_dev",
+		url: "/api/method/marketplace.www.dashboard.index.get_context_for_dev",
 	}).then((values) => {
 		for (let key in values) {
 			window[key] = values[key];

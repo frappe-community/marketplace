@@ -14,10 +14,13 @@
   "column_break_3",
   "publisher",
   "route",
+  "url",
   "published_on",
   "section_break_7",
   "categories",
   "published",
+  "section_break_bgkp",
+  "sources",
   "descriptions_tab",
   "description",
   "app_screenshots_section",
@@ -99,8 +102,7 @@
    "fieldname": "description",
    "fieldtype": "Small Text",
    "in_list_view": 1,
-   "label": "Description",
-   "reqd": 1
+   "label": "Description"
   },
   {
    "fieldname": "app_screenshots_section",
@@ -181,6 +183,21 @@
    "in_standard_filter": 1,
    "label": "Publisher",
    "options": "Marketplace Publisher"
+  },
+  {
+   "fieldname": "section_break_bgkp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "sources",
+   "fieldtype": "Table",
+   "label": "Sources",
+   "options": "Marketplace App Version"
+  },
+  {
+   "fieldname": "url",
+   "fieldtype": "Data",
+   "label": "Repository URL"
   }
  ],
  "grid_page_length": 50,
@@ -189,7 +206,7 @@
  "index_web_pages_for_search": 1,
  "is_published_field": "published",
  "links": [],
- "modified": "2025-12-29 19:17:07.248615",
+ "modified": "2026-02-27 18:57:34.262627",
  "modified_by": "Administrator",
  "module": "Frappe Marketplace",
  "name": "Marketplace App",
@@ -219,6 +236,19 @@
    "select": 1,
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "if_owner": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Marketplace Publisher",
+   "share": 1,
+   "write": 1
   }
  ],
  "row_format": "Dynamic",
@@ -234,6 +264,6 @@
    "title": "Published"
   }
  ],
- "title_field": "title",
+ "title_field": "app",
  "track_changes": 1
 }

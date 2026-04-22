@@ -16,6 +16,7 @@
     "frappe-ui": "^0.1.250",
     "tailwindcss": "^3.4.15",
     "postcss": "^8.4.5",
-    "autoprefixer": "^10.4.2"
+    "autoprefixer": "^10.4.2",
+    "lucide-vue-next": "^0.563.0"
   }
 }

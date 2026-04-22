@@ -9,6 +9,13 @@ export default defineConfig({
 		frappeui({
 			frappeProxy: {
 				port: 8080,
+				rules: {
+					"^/(api|login|logout|assets|files|socket.io)": {
+						target: "http://newmktplace.localhost",
+						changeOrigin: true,
+						ws: true,
+					},
+				},
 			},
 			jinjaBootData: true,
 			lucideIcons: true,

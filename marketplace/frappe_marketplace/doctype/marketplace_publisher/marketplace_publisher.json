@@ -1,11 +1,26 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:user",
  "creation": "2025-12-25 17:58:03.968606",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "user"
+  "user",
+  "section_break_hmxu",
+  "publisher_name",
+  "publisher_type",
+  "column_break_afqe",
+  "contact_email",
+  "company_name",
+  "section_break_zamz",
+  "website",
+  "column_break_xhhk",
+  "logo",
+  "section_break_ypcu",
+  "github_access_token",
+  "github_username",
+  "is_setup_complete"
  ],
  "fields": [
   {
@@ -15,16 +30,91 @@
    "in_list_view": 1,
    "label": "User",
    "options": "User",
-   "reqd": 1
+   "unique": 1
+  },
+  {
+   "fetch_from": "user.full_name",
+   "fetch_if_empty": 1,
+   "fieldname": "publisher_name",
+   "fieldtype": "Data",
+   "label": "Publisher Name"
+  },
+  {
+   "fieldname": "publisher_type",
+   "fieldtype": "Select",
+   "label": "Publisher Type",
+   "options": "Individual\nOrganization"
+  },
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Data",
+   "label": "Company Name"
+  },
+  {
+   "fieldname": "website",
+   "fieldtype": "Data",
+   "label": "Website",
+   "options": "URL"
+  },
+  {
+   "fetch_from": "user.email",
+   "fetch_if_empty": 1,
+   "fieldname": "contact_email",
+   "fieldtype": "Data",
+   "label": "Contact Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "logo",
+   "fieldtype": "Attach Image",
+   "label": "Logo"
+  },
+  {
+   "fieldname": "section_break_hmxu",
+   "fieldtype": "Section Break",
+   "label": "Basic Info"
+  },
+  {
+   "fieldname": "column_break_afqe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_zamz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_xhhk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ypcu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_setup_complete",
+   "fieldtype": "Check",
+   "label": "Is Setup Complete?"
+  },
+  {
+   "fieldname": "github_access_token",
+   "fieldtype": "Password",
+   "label": "Github Access Token"
+  },
+  {
+   "fieldname": "github_username",
+   "fieldtype": "Data",
+   "label": "Github Username"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-02 12:10:33.381671",
+ "modified": "2026-02-09 19:51:32.533080",
  "modified_by": "Administrator",
  "module": "Frappe Marketplace",
  "name": "Marketplace Publisher",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -36,6 +126,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Marketplace Publisher",
    "share": 1,
    "write": 1
   }

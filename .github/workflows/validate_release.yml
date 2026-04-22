@@ -1,0 +1,76 @@
+name: Marketplace App Validation
+
+on:
+  repository_dispatch:
+    types: [validate_release]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    # Borrowed from your file: Real services for a real Frappe environment
+    services:
+      mariadb:
+        image: mariadb:10.6
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports: [3306:3306]
+      redis-cache:
+        image: redis:alpine
+        ports: [13000:6379]
+      redis-queue:
+        image: redis:alpine
+        ports: [11000:6379]
+
+    steps:
+      - name: Setup Python & Node
+        uses: actions/setup-python@v5
+        with: { python-version: '3.14' } # Use stable 3.11 instead of 3.14
+      
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with: { node-version: 24 }
+
+      - name: Initialize Bench
+        run: |
+          pip install frappe-bench
+          bench init --skip-redis-config-generation --skip-assets ~/frappe-bench
+          # Configure MariaDB (Borrowed from your logic)
+          mysql --host 127.0.0.1 -u root -proot -e "SET GLOBAL character_set_server = 'utf8mb4'"
+          mysql --host 127.0.0.1 -u root -proot -e "SET GLOBAL collation_server = 'utf8mb4_unicode_ci'"
+
+      - name: Install Target App
+        working-directory: /home/runner/frappe-bench
+        run: |
+          # Use the payload from your dispatch to get the submitted app
+          bench get-app ${{ github.event.client_payload.app_name }} https://github.com/${{ github.event.client_payload.repo_full_name }} --branch ${{ github.event.client_payload.branch }}
+          
+          # Create site and install the app to see if it even boots
+          bench new-site --db-root-password root --admin-password admin validate_site
+          bench --site validate_site install-app ${{ github.event.client_payload.app_name }}
+
+      - name: Run Basic Validation
+        run: |
+          APP_PATH="/home/runner/frappe-bench/apps/${{ github.event.client_payload.app_name }}"
+          # Check for mandatory hooks.py
+          if [ ! -f "$APP_PATH/${{ github.event.client_payload.app_name }}/hooks.py" ]; then exit 1; fi
+
+      - name: Report Success
+        if: success()
+        run: |
+          curl -X POST "${{ github.event.client_payload.callback_url }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "release_id": "${{ github.event.client_payload.release_id }}",
+              "status": "success",
+              "secret_key": "${{ github.event.client_payload.secret_key }}",
+              "commit_hash": "${{ github.sha }}"
+            }'
+
+      - name: Report Failure
+        if: failure()
+        run: |
+          curl -X POST "${{ github.event.client_payload.callback_url }}" \
+            -H "Content-Type: application/json" \
+            -d '{"release_id": "${{ github.event.client_payload.release_id }}", "status": "failure", "secret_key": "${{ github.event.client_payload.secret_key }}"}'

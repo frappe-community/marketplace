@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "SRC-.{app}.-.###",
  "creation": "2025-12-29 13:12:14.145793",
  "default_view": "List",
  "doctype": "DocType",
@@ -15,9 +16,11 @@
   "data_3",
   "repository",
   "repository_owner",
+  "github_repo_full_name",
   "branch",
   "section_break_8",
   "publisher",
+  "current_release",
   "public",
   "column_break_11",
   "github_installation_id",
@@ -37,15 +40,13 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "App",
-   "options": "App",
-   "reqd": 1
+   "options": "App"
   },
   {
    "fetch_from": "app.title",
    "fieldname": "app_title",
    "fieldtype": "Data",
-   "label": "App Title",
-   "reqd": 1
+   "label": "App Title"
   },
   {
    "default": "0",
@@ -64,8 +65,7 @@
   {
    "fieldname": "repository_url",
    "fieldtype": "Data",
-   "label": "Repository URL",
-   "reqd": 1
+   "label": "Repository URL"
   },
   {
    "fieldname": "data_3",
@@ -88,8 +88,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Branch",
-   "reqd": 1
+   "label": "Branch"
   },
   {
    "fieldname": "section_break_8",
@@ -140,8 +139,7 @@
    "fieldname": "versions",
    "fieldtype": "Table",
    "label": "Versions",
-   "options": "App Source Version",
-   "reqd": 1
+   "options": "App Source Version"
   },
   {
    "fieldname": "github_section",
@@ -173,8 +171,18 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Publisher",
-   "options": "Marketplace Publisher",
-   "reqd": 1
+   "options": "Marketplace Publisher"
+  },
+  {
+   "fieldname": "current_release",
+   "fieldtype": "Link",
+   "label": "Current Release",
+   "options": "App Release"
+  },
+  {
+   "fieldname": "github_repo_full_name",
+   "fieldtype": "Data",
+   "label": "Github Repo Full Name"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -184,10 +192,11 @@
    "link_fieldname": "reference_name"
   }
  ],
- "modified": "2025-12-29 19:14:34.779496",
+ "modified": "2026-02-06 13:09:16.592686",
  "modified_by": "Administrator",
  "module": "Frappe Marketplace",
  "name": "App Source",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

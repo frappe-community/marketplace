@@ -14,6 +14,7 @@ class App(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
+		app_name: DF.Data
 		branch: DF.Data | None
 		enable_auto_deploy: DF.Check
 		enabled: DF.Check

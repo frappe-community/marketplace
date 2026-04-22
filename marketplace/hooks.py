@@ -69,7 +69,7 @@ website_route_rules = [
 # role_home_page = {
 # 	"Role": "home_page"
 # }
-
+role_home_page = {"Marketplace Publisher": "/dashboard"}
 # Generators
 # ----------
 
@@ -138,13 +138,14 @@ website_route_rules = [
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"User": {"on_update": "marketplace.api.github.add_publisher_role_on_github_login"}
+	# 	"*": {
+	# 		"on_update": "method",
+	# 		"on_cancel": "method",
+	# 		"on_trash": "method"
+	# 	}
+}
 
 # Scheduled Tasks
 # ---------------

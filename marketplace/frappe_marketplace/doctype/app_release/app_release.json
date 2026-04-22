@@ -1,0 +1,167 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "REL-.{app}.-.####",
+ "creation": "2026-01-30 16:10:40.152407",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "app",
+  "source",
+  "publisher",
+  "column_break_bocs",
+  "branch",
+  "hash",
+  "message",
+  "author",
+  "validation_section",
+  "invalid_release",
+  "invalidation_reason",
+  "column_break_ohww",
+  "status",
+  "ci_status",
+  "ci_log_url",
+  "amended_from",
+  "validation_logs"
+ ],
+ "fields": [
+  {
+   "fieldname": "app",
+   "fieldtype": "Link",
+   "label": "App",
+   "options": "App"
+  },
+  {
+   "fieldname": "source",
+   "fieldtype": "Link",
+   "label": "Source",
+   "options": "App Source"
+  },
+  {
+   "fieldname": "publisher",
+   "fieldtype": "Link",
+   "label": "Publisher",
+   "options": "Marketplace Publisher"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Data",
+   "label": "Branch"
+  },
+  {
+   "fieldname": "hash",
+   "fieldtype": "Data",
+   "label": "Hash"
+  },
+  {
+   "fieldname": "message",
+   "fieldtype": "Small Text",
+   "label": "Message"
+  },
+  {
+   "fieldname": "author",
+   "fieldtype": "Data",
+   "label": "Author"
+  },
+  {
+   "fieldname": "column_break_bocs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "validation_section",
+   "fieldtype": "Section Break",
+   "label": "Validation"
+  },
+  {
+   "default": "0",
+   "description": "A release is invalid if it fails validations checks. For instance if it has syntax errors.",
+   "fieldname": "invalid_release",
+   "fieldtype": "Check",
+   "label": "Invalid Release"
+  },
+  {
+   "depends_on": "eval:doc.invalid_release",
+   "fieldname": "invalidation_reason",
+   "fieldtype": "Code",
+   "label": "Invalidation Reason"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nApproved\nAwaiting Approval\nRejected"
+  },
+  {
+   "fieldname": "ci_log_url",
+   "fieldtype": "Data",
+   "label": "CI Log URL",
+   "options": "URL"
+  },
+  {
+   "fieldname": "ci_status",
+   "fieldtype": "Select",
+   "label": "CI Status",
+   "options": "Pending\nRunning\nPassed\nFailed"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "App Release",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "column_break_ohww",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "validation_logs",
+   "fieldtype": "Long Text",
+   "label": "Validation Logs"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-02-04 15:34:54.447612",
+ "modified_by": "Administrator",
+ "module": "Frappe Marketplace",
+ "name": "App Release",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Marketplace Publisher",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
